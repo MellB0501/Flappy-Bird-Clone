@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    
+    font-family: 'New Tegomin', serif;
+    color: black;
+    font-size: 30px;
+    font-weight: normal;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+#score {
+    align-content: center;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: black;
+    font-size: 30px;
+    font-weight: normal;
+}
+
+#gameoverscreen {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#gameoverscreen .backdrop {
+    background: black;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+}
+
+#gameoverscreen .title,
+#gameoverscreen .score,
+#gameoverscreen button {
+    position: absolute;
+    z-index: 1;
+    left: calc(50% - 102px);
+    width: 204px;
+    top: 40%;
+    text-align: center;
+    color: rgb(255, 255, 74);
+}
+
+#gameoverscreen .title {
+    margin-top: -70px;
+    font-size: 50px;
+}
+
+#gameoverscreen button {
+    margin-top: 100px;
+    color: black;
+    font-size: 24px;
+    padding: 5px 25px;
+    cursor: pointer;
+    border: 0;
+}
+
+#star {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    background: url('/images/shinystar.jpg');
+    background-position: center;
+    background-size: contain;
+}
+
+#game {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: url('/images/cityworld.jpeg');
+    background-position: center left;
+}
+
+#block {
+    width: 45px;
+    height: 100vh;
+    background: url('/images/blockbg.png');
+    background-position: center;
+    background-size: contain;
+    position: relative;
+}
+
+#hole {
+    width: 47px;
+    height: 193px;
+    position: relative;
+    top: -500px;
+    background: url('/images/holebg3.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    top: -700px;
+}
+
+#block, #hole {
+    left: 10vw;
+    /* animation: blockAnimation 2s infinite linear; */
+}
+
+#character {
+    width: 70px;
+    height: 80px;
+    position: absolute;
+    background: url('/images/frame-1i.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: 20vh;
+    left: 20vh;
+}
+
+.go-up {
+    animation: rotateUp 0.2s;
+    animation-fill-mode: forwards;
+}
+
+.go-down {
+    animation: rotateDown 0.2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes blockAnimation {
+    0% { left: 100vw; }
+    100% { left: -50px; }
+}
+
+@keyframes rotateUp {
+    0% { transform: rotate( 0deg ) }
+    100% { transform: rotate( -35deg ) }
+}
+
+@keyframes rotateDown {
+    0% { transform: rotate( 0deg ) }
+    100% { transform: rotate( 35deg ) }
+}
