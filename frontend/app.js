@@ -59,17 +59,17 @@ function setEventListeners() {
 }
 
 function gameOver() {
-    // game over sound effect
+    (new Audio( '/sounds/gameover.wav' )).play()
     gameStopped = true
     showGameoverscreen()
     stopBlockAnimation()
-    stopGravity()
+    startGravity()
     hideStar()
     //stopBgAnimation()
 }
 
 function resetCharacterPosition() {
-    character.style.top = '  0vh'
+    character.style.top = '  30vh'
     character.style.left = '25vw'
 }
 function resetScore() {
@@ -83,8 +83,8 @@ function changeScoreUi() {
 
 const gameSpeedConfig = {
     'slow': 250,
-    'normal': 500,
-    'fast': 750,
+    'normal': 550,
+    'fast': 1000,
     'faster': 2000,
     'ridiculous': 5000
 }
@@ -96,7 +96,11 @@ function resetAllAnimations() {
     block.style.animation = blockAnimationCss
     hole.style.animation = blockAnimationCss
 
-    //random star implementation
+    if ( star.style.display !== 'none' ) return
+
+    const num = getRandomNumber( 1, 5 )
+    const starAnimationCss = `starAnimation${ num } ${ seconds }s infinite linear`
+    star.style.animation = starAnimationCss
 }
 
 function stopBlockAnimation() {
@@ -117,6 +121,7 @@ function characterJump() {
         changedGameState( {diff: -3, direction: 'up' })
 
         if ( jumpCount > 20 ) {
+            (new Audio( '/sounds/flying.wav' )).play()
             clearInterval( jumpInterval)
             isJumping = false
             jumpCount = 0
@@ -137,11 +142,12 @@ function changedGameState({diff, direction}) {
 function handleStarDetection() {
     if ( star.style.display === 'none' ) return
 
-    if ( detectCollision( character, star ))
-    //play sound effect for star
-    scoreTotal =+ 150
-    hideStar()
-    changeScoreUi()
+    if ( detectCollision( character, star )) {
+        (new Audio( '/sounds/collectstar.wav' )).play()
+        scoreTotal += 150
+        hideStar() 
+        changeScoreUi()
+    }
 }
 
 function handleGameSpeed() {
@@ -154,11 +160,11 @@ function handleGameSpeed() {
         gamespeed = 'faster'
         doReset = true
     }
-    else if ( scoreTotal > 750 ) {
+    else if ( scoreTotal > 1000 ) {
         gamespeed = 'fast'
         doReset = true
     }
-    else if ( scoreTotal > 500 ) {
+    else if ( scoreTotal > 550 ) {
         gamespeed = 'normal'
     }
     else if ( scoreTotal > 250 ) {
@@ -168,7 +174,7 @@ function handleGameSpeed() {
     if ( doReset ) {
         const timeoutLength = gameSpeedConfig[ gamespeed ] * ( gameSpeedConfig[ gamespeed ] / 10 )
         setTimeout( e => {
-            if ( gameStopped) return
+            if ( gameStopped ) return
         
             resetAllAnimations()
         }) //timeoutLength)
@@ -203,11 +209,12 @@ function handleCharacterCollisions() {
 
         soundCount++
         if ( soundCount > 35 ) {
-            //play hole sound
+            (new Audio( '/sounds/zap.wav' )).play()
             soundCount = 0
         }
 
         changeScoreUi()
+
         if ( gameStopped ) return
 
         numOfHoles++
@@ -215,7 +222,7 @@ function handleCharacterCollisions() {
             numOfHoles = 0
 
             showStar()
-            setTimeout( e => hideStar(), 1500)
+            setTimeout( e => hideStar(), 10000 )
         }
     }
 }
@@ -252,7 +259,7 @@ function beginGravity() {
     }, 20)
 }
 
-function stopGravity () {
+function startGravity () {
     gravityStopped = true
 }
 
@@ -273,12 +280,12 @@ function showStar() {
 
 function hideStar() {
     star.style.display = 'none'
-}
+} 
 
-function gameInit() {
+function gameInit() {   
     getElements()
     setInitialValues()
-    beginGravity()
+    beginGravity()    
     initRandomHoles()
     setEventListeners()
     resetAllAnimations()

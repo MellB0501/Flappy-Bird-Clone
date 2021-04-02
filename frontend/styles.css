@@ -3,8 +3,7 @@
 * {
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    
+    overflow: hidden; 
     font-family: 'New Tegomin', serif;
     color: black;
     font-size: 30px;
@@ -17,7 +16,6 @@ body {
 }
 
 #score {
-    align-content: center;
     position: absolute;
     top: 20px;
     left: 20px;
@@ -71,7 +69,7 @@ body {
     width: 35px;
     height: 35px;
     position: absolute;
-    background: url('/images/shinystar.jpg');
+    background: url('/images/star.png');
     background-position: center;
     background-size: contain;
 }
@@ -101,18 +99,11 @@ body {
     background: url('/images/holebg3.png');
     background-size: contain;
     background-repeat: no-repeat;
-
-    top: -700px;
-}
-
-#block, #hole {
-    left: 10vw;
-    /* animation: blockAnimation 2s infinite linear; */
 }
 
 #character {
     width: 70px;
-    height: 80px;
+    height: 60px;
     position: absolute;
     background: url('/images/frame-1i.png');
     background-size: contain;
@@ -145,3 +136,25 @@ body {
     0% { transform: rotate( 0deg ) }
     100% { transform: rotate( 35deg ) }
 }
+
+@keyframes starAnimation1 {
+    0% { left: 50vw; }
+    100%{ left: -50px; }
+}
+@keyframes starAnimation2 {
+    0% { left: 60vw; }
+    100%{ left: -50px; }
+}
+@keyframes starAnimation3 {
+    0% { left: 70vw; }
+    100%{ left: -50px; }
+}
+@keyframes starAnimation4 {
+    0% { left: 80vw; }
+    100%{ left: -50px; }
+}
+@keyframes starAnimation5 {
+    0% { left: 90vw; }
+    100%{ left: -50px; }
+}
+
